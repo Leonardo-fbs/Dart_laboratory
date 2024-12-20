@@ -1,36 +1,36 @@
-// CONCEITUANDO O JS
+// Conceituando O JS
 // Criada  a partir do CMM feita pela cepewwave mas decidirão mudar o nome para ScriptEase que
 // despertou interesse da netscape que estava numa briga com a microsoft.Em 1945  a linguagem mudou
 // para Mocha de liveScript a netscape estava em negociação com a SUN Microsystem que estava fazendo
 // o java então a netscape SUN fizeram uma jogada de marketing de fundir o nome das 2 linguagens
-// elas são semelhante porque foram baseadas em C.
-// Tipagem dinâmica fraca
-// Client Side e Server
-// Há mais vulnerabilidade por estar do lado do cliente, ainda mais quando se trata de validações
+// elas são semelhante porque foram baseadas em C. Tipagem dinâmica fraca é Client Side e Server.
+// node permite js exe. em qualquer lugar que antes era só web. Ao incluir no html usar tag type=module
+// Há mais vulnerabilidade por estar do lado do cliente, ainda mais quando se trata de validações.
 
+// console.log() === echo;
+// ; opcional
 
-// exibe uma mensagem no console semelhante ao echo
-// console.log("; Não é obrigatório no JS, mas seja consistente ou use ou não use.");
-
-// Undefined X Null
+// UNDEFINED X NULL
 // Undefined é quando a var não foi declarada e null é um valor atribuido e intencional
 // NaN Not a Number é um valor que não é um número
 // é possivel declarar numeros octo e hexadecimal
 // VAR é de escopo global, let e const são de escopo local
+
+// Copia Superficial 
+// Object. compartilha mesma referencia ou sej alert. o original alterar a copia superficial.
+
 function testeDeEscopo() {
-    if (true) {
-        var testeGlobal = "Global";
-        let testeLocal = "Local";
-        let testeNull = null;
-        let testeUndefined = undefined;
-    }
+    var testeGlobal = "Global";
+    let testeLocal = "Local";
+    let testeNull = null;
+    let testeUndefined = undefined;
     console.log(typeof testeGlobal);
     console.log(typeof testeLocal);
     console.log(typeof testeNull);
     console.log(typeof testeUndefined);
 }
 
-// Operador ternário 
+// OPERADOR TERNARIO
 // pode substituir if else em caso simples
 function opTernario() {
     let num = 10;
@@ -39,7 +39,7 @@ function opTernario() {
     console.log(result);
 }
 
-//Funções
+// FUNÇÕES
 function funcoesGenericas(parametro) {
     //Variaveis para teste
     let seq = 183872394238;
@@ -49,9 +49,101 @@ function funcoesGenericas(parametro) {
     // Parse (conversão)
     console.log(parseFloat(seq));
     console.log(parseInt(palavra));//NaN
-    console.log(seq.toString());
-    // é usado para conversão
+    console.log(seq.toString());// é usado para conversão para texto
+    console.log(frase.substring(0, 10));//1°para. inicio e fim de onde devolver as string
+    console.log(frase.toLocaleLowerCase());
+    console.log(frase.toLocaleUpperCase());
+    console.log(frase.toLowerCase());
+    console.log(frase.toUpperCase());
 }
+
+// i++
+function imais() {
+    //i++ lê depois add o valor ++i add valor primeiro
+    let i = 5;
+    let valorA = i++;
+    let valorB = ++i;
+
+    console.log("O valor de valorA é:", valorA);
+    console.log("O valor de valorB é:", valorB);
+    // O operador i++ faz um pós-incremento, o que significa que 
+    // primeiro atribui o valor atual de i a valorA e depois 
+    // incrementa i. Em seguida, o operador ++i incrementa o 
+    // valor de i e atribui esse valor a valorB.
+}
+
+// FOR
+// Padrão
+function formasDoFor() {
+    const notas = ["um", "dois", "tres", "four", "five", "six", "seven", "eight"];
+
+    for (let indice = 0; indice < notas.length; ++indice) {
+        console.log
+            (indice, notas[indice]);
+    }
+
+    //For Of
+    for (let nota of notas) {
+        console.log(nota);
+    }
+
+    //For Each não retorna nenhum valor
+    notas.forEach(function (nota) {
+        console.log(nota);
+    })
+
+    // For in
+    const objeto = { nome: "leo", age: 19, ende: [{ rua: "rua 1", numero: 100 }] }
+    for (let key in objeto) {
+        // const texto = `a chave ${key} tem valor ${objeto[key]}`
+        // Resolvendo o problema de object object
+        const tipo = typeof objeto[key]; // FILTAR OS OBJETOS
+        if (tipo !== "object" && tipo !== "function") {
+            const texto = `a chave ${key} tem valor ${objeto[key]}`
+            console.log(texto);
+        }
+        // erro object object ocorre quando se tenta força um objeto a ser uma string
+    }
+}
+
+
+function objetos() {
+    const car = { motor: "bom", rodas: 4, cor: "azul" };
+    const pessoa = { nome: "very much", altura: 3, pele: "invisible" };
+
+    //return keys
+    const keys = Object.keys(car);
+    console.log(keys);
+
+    //return keys
+    const valores = Object.values(car);
+    console.log(valores);
+
+    //entries retorn os dois key e value
+    const mesclagem = Object.entries(car);
+    console.log(mesclagem);
+
+    // Fusão e copia (assign)
+    const fusion = Object.assign({}, car, pessoa);
+    console.log(fusion);
+
+    // validação de key util para saber se ao add algum atributo já consta ou não no obj
+    if (!keys.includes('dono')) {
+        console.log("Quem é o dono krl???");
+    }
+
+
+
+
+}
+
+//mais enxuto
+//const notasAtualizadas = notas.map((nota) => nota + 1 >= 10 ? 10: nota + 1);
+
+
+// const arrayNums = [1, 2, 3, 4]
+// const arrynovo = arrayNums.map(notas => notas *= 10)
+// console.log(arrynovo)
 
 
 // Quando passamos como valor undefined para alguma função e ele já tiver valor padrao ele irá pegar este valor.
@@ -68,6 +160,7 @@ function funcoesGenericas(parametro) {
 // Objetos JS
 // Quando criamos um objeto dentro do JavaScript ocorre a reserva de um espaço na memória local que chamamos de heap.Ao fazer isso, o que o JavaScript guarda na nova variável não é o valor do Objeto que criamos, mas sim o endereço de memória onde os valores estão salvos.Dessa forma, ao declararmos uma variável que armazena informações dentro do heap, o que estamos fazendo é "alugar" um espaço da memória, o qual funções podem acessar.Isso torna as operações muito mais eficientes, mas tem um problema: quaisquer alterações no conteúdo armazenado pelos objetos não primitivos afetam todas as variáveis que o referenciam.Como essas variáveis são links para espaços na memória, dizemos que elas são um "tipo de referência" enquanto que os tipos primitivos são "um tipo de valor".Notação de objeto javascript é um formato de transferência de dados usado em chamadas AJAX entre o navegador é um servidor.Por mais que seu nome tenha javascript ele é mais restrito que um obj.Javascript enquanto num obj.Javascript ele teria as propriedades no JSON ele tem apenas os valores.O JSON não pode ter funções, comentários e todo texto sempre tem aspas duplas e elas sempre têm prioridade.
 //     Heap
+// para alterar de forma direta o valor de um objeto, é necessário usar o Object.create()
 // Operadores
 // instanceOf serve para verificar se a variavel é instancia uma instancia da classe seguida do operador
 // Métodos
@@ -94,10 +187,18 @@ function funcoesGenericas(parametro) {
 
 // Arrays
 // Um array list const pode ser add e alterado, mas não se pode mudar o tipo
+
+// Referencia X Clonar
+// Referencia é feita de forma padrão usando array x = y
+// Clonar é feito com uso do operador de espalhamento"..."
+// Exemplo onde é possivel ver a != ao usar o push que quaando ref. add nos arrays ele altera o original e o "clonado"
+
 function listas() {
-    const people = ["julio", "Lucas", "douglas", "ezio", "martins", "manu", "erick", "martina"];
+    const people = ["julio", "Lucas", "julio", "Lucas", "martins", "manu", "erick", "martina"];
     const valores = [100, 293, 929, 320, 120, 903, 574];
     const outroValores = [100110010, 1111, 11001, 110010110];
+    const fragmentos = ['gatilho', "ferrolho", "alavanca do ferrolho", "cão",];
+
 
     //array com mais uma dimensão
     const matriz = [people, valores];
@@ -129,58 +230,102 @@ function listas() {
     function acessoDireto({ width, height }) {
         console.log(width, height);
     };//Outro jeito de acessar por função direto
-    ////acessoDireto(edit);
+    //acessoDireto(edit);
+
+    //Filter copy superficial c/elem. TDS que foram validados
+    const filtrado = valores.filter(valor => valor > 100);
+    console.log(filtrado);
+
+    //reduce parâ.1 original parâ.2 return
+    const soma = valores.reduce((acumulador, valor) => acumulador + valor, 0);
+    console.log(soma);
+
+    //Remover duplcidades
+    const semDuplicatas = [new Set(people)];
+    console.log(semDuplicatas);// ele é CONJUNTO !ARRAY é um array like
+
+    //add os valores filtrados para um ARRAY
+    const arrayFiltrado = [...new Set(filtrado)];// "..."
+    console.log(arrayFiltrado);
+
+    console.log(outroValores.join('-'))//retorna com valor de dentro das aspas separando cada item
+
+    // retorna a posição do parâmetro ou -1 se não achar
+    console.log(people.indexOf('julia'));
+
+    // semelhante ao indexof mas inicia a pesquisa do fim
+    console.log(people.lastIndexOf('julia'));
+
+    // parâmetro 1 indice, 2 delete qtd e 3 recebe o valor a add
+    fragmentos.splice(1, 2, 'Alça-mira');
+    console.log(fragmentos);
+    
+    // retorna primeiro elemento verdadeiro conforme a condição
+    const found = fragmentos.find((element) => element == "gatilho");
+    const foundErro = fragmentos.find((element) => element == "alavanca");
+    console.log(found, foundErro);
+    // semelhantes:
+    // findIndex() return indice
+
+    // Push() add na última posição do array
+    // Unshift() add no começo do array
+    // Pop() remove o último item do array
+    // Shift() remove o primeiro item de um array
+    // Reverse() reverte o array
+
 
 }
 
 
+// Objects
+function jobObject() {
+    const military = { name: "Chris", surname: "Kyle", patent: "sargent", kills: 333 };
+    // padrão de acessar
+    // console.log(military.name);
+    // console.log(military.kills);
+    // console.log(military.surname);
+    // console.log(military.patent);
+    // BIZU
+    function easy(obj, info) {
+        return obj[info];
+    }
+    console.log(easy(military, 'name'));
 
-listas();
-// Splice() recebe a posição e quantidade de itens desejados para excluir depois o que irá ser add
+    // Var que não existem não dão erro sim undefined
 
-// Push() add na última posição do array
+    // JEITOS ERRADO DE TENTAR BUSCA RETURN
+    // console.log(military[name]); ERRO
+    // console.log(military[0]); UNDEFINED
+    // console.log(military.name()); NOT FUNCTION
+    // JEITO CERTO console.log(military['name'])
 
-// Unshift() add no começo do array
-
-// Pop() remove o último item do array
-
-// Shift() remove o primeiro item de um array
-
-// Sort() ordena em ordem alfabética
-
-// Reverse() reverte o array
+    // DELETE
+    delete military.surname;
+    delete military["kills"]
 
 
-// Seletores
+}
 
-//     querySelectorAll() semelhante ao querySelector porém seleciona todos elementos em vez de apenas o primeiro.Caso não tenha nada ele 
+// DESESTRUTURANDO OBJETOS
+function desestruturando() {
+    const civil = { nome: "Donald", altura: 1.5, peso: 78 };
+    // vincula o obj. ás variaveis 
+    const { nome, altura, peso, sexo } = civil; // var devem ter no obj
+    console.log(nome);
+    console.log(sexo);// undefined pois não tem no obj
+    // Associar a outros nomes 
+    const { nome: name, altura: height, peso: weight } = civil;
+    console.log(name);
+    // Desvantagens mais complexo e deve eliminar as var quando não mais usadas
+}
 
-// Selecionar filhos para isso basta usa um dos query selector passando o pai depois o filho como argumento
-
-// Erro querySelector ao passar para parâmetro o elemento que deseja seleciona as vezes no query selector pode ocorrer erro eu consegui resolver criando uma variável com o valor para ser passo para o querySelector em vez de passar direto.
-
-//     Strings
-
-// Toda string é uma array de caracteres
-// Interpolação funciona nas versões mais nova dentro de ‘ ‘ basta utilizar ${ variável }, substituindo a concatenação por “” + “”
-// variavel.replace() usada para fazer substituições de string da mais complexas a mais simples podendo ser útil para criar mascara.Primeiro recebe como parâmetro o que deseja ser retirado e depois o que irá substituir.É possível criar uma lista de palavras com palavrão e depois substituir por * ou outra coisa.O problema é que ele substitui apenas a primeira palavra para resolver esse problema temos que usar regex semelhante a seguinte forma “/palavra/g” o ‘g’ serve para indica que a variavel é global
-
-// toString() retorna como texto
-
-// Join() retorna com valor de dentro das aspas separando cada item
-
-// indexOf() retorna a primeira posição do parâmetro, presente na variável
-
-// lastIndexOf() retorna a última posição do parâmetro, presente na variável
-
-// Slice() recebe como parâmetro a posição inicial e a última que deseja ser retornada é semelhante a substring
-
-// toLowerCase() deixa todas as letras minúsculas e o toUpperCase() deixa em letras maiúsculas 
-
+// INTERPOLAÇÃO or TEMPLATE STRING or TEMPLATE LITERALS
+// Dentro de ‘ ‘ basta utilizar ${ variável }, substituindo a concatenação por “” + “”
 
 // DOM Document Object Model
 // Através dele é possível alterar tudo no html ele é responsável por interpretar, alterar e organizar todos elementos HTML
 // Window & DOM: dom tem como limite do documento da página e window janela do Browser
+// DOM & BEM: utilizar os dois pode ser de grande proveito pois pode referir á class
 function funcoesDOM() {
     //usam document pois é arquivo raiz e const pois n havera alterações nelas
     const identificacao = document.getElementById("");
@@ -188,48 +333,30 @@ function funcoesDOM() {
     const tagName = document.getElementsByTagName("");// retorna uma array
     const selecionarPrimeiro = document.querySelector(""); // seleciona primeiro elem.
     const selecionarVarios = document.querySelectorAll("div p"); // job nodelist != arrays.
+    // seletor.style.proriedade
+    identificacao.style.backgroundColor = "red";
+
 
 }
 
-
-//     seletor.style.proriedade
-
+// EVENTS
 // Quando se refere a eventos pode chamar uma função no evento que está na TAG ou seleciona o elemento e utilizar.onclick = funcao;
-
-// Validation
-
-// Validity() retorna verdadeiro ou falso
-
-// PatternMismatch verifica pattern
-
-// SetCustomValidity personaliza a resposta para o usuário
-
-// Template string ou Template literals
-// Substitui a concatenação de texto e variáveis usando ${ variável } para representar a variável e trocando o "" por '' apenas isso não é necessário colocar +.
-
-
-//     Events
-
 // onchaged para quando houver alteração elemento
-
 // onclick para quando clicarem no elemento
-
 // onmouseover quando o mouse estiver em cima do elemento onmouseout quando o mouse não estiver em cima do elemento
 // De vez add propriedades em eventos add classes com essas propriedades
-
 // onmousedown
 // onmouseup
 // onfocus
+// addEventListener('event', 'function') passando por parâmetro o evento e depois a função sem o parêntese
 
 
 
 
 
-// Ao utilizar o get do dom basta colocar[] com o número desejado para seleciona - lo.
 
 // innerText seleciona apenas o texto já o innerHTML seleciona os textos e tags html
 
-// É possível declara os eventos por javascript selecionando o elemento e usando a função addEventListener('event', 'function') passando por parâmetro o evento e depois a função sem o parêntese
 
 
 // Bind
@@ -261,7 +388,6 @@ function funcoesDOM() {
 // Para criar um module basta usar no terminal npm init depois nomear, colocar uma descrição entre outras informações
 // Para exportar um arquivo JS é necessário usar a palavra export na class ou etc
 
-// Para importar basta usar import { Class } from “caminho / arquivo.js”
 
 // Package.js a tag script tem a função de inicializar todas instruções nela quando usado o comando npm start
 
@@ -274,57 +400,12 @@ function funcoesDOM() {
 // window.localStorage.setItem('key', 'value') tem armazenamento local quando queremos pegar esse item usamos get no lugar do set para pegar o item é apenas necessário a key.Já window.sessionStorage.setItem serve para apenas uma sessão.
 
 
-// Tagged Template String ou Template Literals
-// Introduzido no ES6 onde possibilita criar cadeias de carácter usando interpolação antes era usado “” e + mas deixa o codigo confuso quando muito grande.É uma chamada de função onde os argumentos são derivados de uma template literal seus valores desses argumentos incluem um Template Object(que nada mais é do que o objeto representativo das Template Literals) e os valores produzidos após avaliação das expressões embutidos em uma Template Literals(${}).A tag nada mais é do que a própria função que será chamada através da utilização da Template Literals.Vamos ao exemplo para ficar mais claro.
 // Estamos mais acostumados a ver chamadas de funções dessa forma:
 // minhaFunction = (texto) => {
 //     console.log(texto);
 // }
 
-// minhaFunction( ‘texto como parâmetro’);
-// Porém, utilizando Tagged Template Literals, nossa chamada para a função seria executada da seguinte maneira:
-// minhaFunction`texto como parâmetro`;
-// aturalmente pensamos que as duas chamadas são equivalentes, porém isso NÃO é verdade.
-// O que ocorre é que quando utilizamos Template Literals para realizar a chamada de uma função, o parâmetro pode ser passado de duas formas.
-// Quando nossa Template Literals é composta apenas de uma string, sem a necessidade de se avaliar valores de variáveis interpoladas, nosso parâmetro é um array, veja abaixo:
-// //As duas chamadas abaixo são equivalentes!
 
-// minhaFunction([‘texto como parâmetro’]);
-// minhaFunction`texto como parâmetro`;
-// Repare que recebemos o parâmetro sendo um array, de fato, isso não é algo trivial, mas calma!
-// Tem explicação!
-// Lembra lá em cima no começo do texto quando relembramos Template Literals(Template Strings) ?
-//     Uma dos poderes desse Template Literals é a capacidade de interpolar os valores de variáveis e é justamente por isso que recebemos um array como parâmetro.
-// Vamos ao exemplo, reescrevendo nossa função:
-// minhaFunction = (arrayDeStrings, palavra) => {
-//     console.log(`${arrayDeStrings[0]}${palavra}${arrayDeStrings[1]}`);
-// }
-
-// const palavra = 'alura';
-
-// minhaFunction`Eu estudo na ${palavra} todos os dias`;
-// Quando utilizamos a notação ${ } no meio de uma sentença, nossa string é quebrada ao meio, vamos ver como seria uma função semelhante utilizando a notação que conhecemos.
-//     minhaFunction = (arrayDeStrings, palavra) => {
-//         console.log(`${arrayDeStrings[0]}${palavra}${arrayDeStrings[1]}`);
-//     }
-
-// const palavra = 'alura';
-
-// minhaFunction(['Eu estudo na ', ' todos os dias'], palavra);
-// Veja agora que na verdade, temos um Array de cadeias de caracteres e essas cadeias são determinadas pelo posicionamento da nossa interpolação!
-// Analogamente, todos os valores interpolados são passados um a um após o Array, respeitando a ordem em que aparecem na Template Literals, veja o exemplo abaixo:
-// minhaFunction = (arrayDeStrings, palavra, periodo) => {
-//     console.log(`${arrayDeStrings[0]}${palavra}${arrayDeStrings[1]}${periodo}`);
-// }
-
-// const palavra = 'alura';
-// const periodo = 'semana';
-
-// // As duas chamadas são equivalentes!
-
-// minhaFunction`Eu estudo na ${palavra} todos os dias da ${periodo}`;
-
-// minhaFunction([‘Eu estudo na ' ,' todos os dias da '], palavra, periodo);
 
 // pesquisa
 // super
@@ -353,7 +434,7 @@ function funcoesDOM() {
 //     .script('plugin.jquery.js').wait()
 //     .script('app.js');
 
-// // carrega e executa outro script em paralelo, com callback
+// carrega e executa outro script em paralelo, com callback
 // $LAB.script('sem-dependencias.js').wait(function () {
 //     alert('Callback executando quando script carrega');
 
@@ -384,56 +465,65 @@ function funcoesDOM() {
 // innerHtml escreve no conteúdo selecionado
 
 
-// Arrow fun
-// Fun anomima
-
 // DocString comentário usado para e
 
 
 
-//     3Para saber mais: arrow functions
-// Próxima Questão
-// ·
-// Arrow functions, ou funções seta, são uma maneira mais curta e concisa de escrever funções em JavaScript.Elas foram introduzidas no ES6(ECMAScript 2015) e rapidamente se tornaram populares entre os desenvolvedores devido à sua sintaxe simplificada e ao comportamento diferenciado do this.Vamos mergulhar no mundo das arrow functions para entender como elas funcionam e como podem ser aplicadas em diferentes contextos.
-// Uma arrow function é expressa através de uma "seta"(=> ).A sintaxe básica é a seguinte:
-//     const nomeDaFuncao = (parametros) => {   // corpo da função }; Copiar código
-// Por exemplo, uma função que soma dois números pode ser escrita como:
-//         const soma = (a, b) => { return a + b; }; Copiar código
-// Sintaxe Concisa
-// Uma das grandes vantagens das arrow functions é a possibilidade de escrever funções de maneira mais concisa.Se a função tiver apenas uma linha de código que retorna um valor, você pode omitir as chaves { } e a palavra - chave return:
-//         const soma = (a, b) => a + b; Copiar código
-//         Parâmetros
-// Se a função tiver apenas um parâmetro, você pode omitir os parênteses:
-//         const quadrado = x => x * x; Copiar código
-// Funções sem Parâmetros
-// Se a função não tiver parâmetros, você deve usar parênteses vazios:
-//         const logMensagem = () => console.log('Olá, mundo!'); Copiar código
-// Arrow Functions e o this
-// Um dos aspectos mais importantes das arrow functions é como elas lidam com o this.Diferentemente das funções tradicionais, o valor de this dentro de uma arrow function é determinado pelo contexto onde a função foi criada, e não onde ela é chamada.Isso é particularmente útil em callbacks e funções que são passadas como argumentos.
-// Exemplo Prático
-// Considere o seguinte código que usa uma função tradicional:
-//         function Pessoa() {
-//             this.idade = 0; setInterval(function crescer() {
-//                 this.idade++; // Aqui, `this` não se refere ao objeto Pessoa   }, 1000); } Copiar código
-// Neste caso, this dentro de crescer não se refere ao objeto Pessoa, mas isso pode ser corrigido usando uma arrow function:
-//                     function Pessoa() {
-//                     this.idade = 0; setInterval(() => {
-//                         this.idade++; // Aqui, `this` se refere ao objeto Pessoa   }, 1000); } Copiar código
-// Comparação com Funções Tradicionais
-//                         Enquanto as arrow functions são úteis em muitos casos, elas não são uma substituição completa para as funções tradicionais.Por exemplo, arrow functions não têm seu próprio this, arguments, super ou new.target e não podem ser usadas como construtores.
-// Quando Usar Arrow Functions
-// ·	Em callbacks ou funções passadas como argumentos.
-// ·	Quando você precisa de uma função anônima(por exemplo, em métodos de array como map, filter, reduce).
-// ·	Quando o comportamento léxico do this é desejado.
-// Quando Evitar Arrow Functions
-// ·	Métodos de objeto que você espera usar this para acessar o próprio objeto.
-// ·	Funções que você planeja usar como construtores(com a palavra - chave new).
-// ·	Quando você precisa de uma função com nome para melhorar a legibilidade ou para fins de depuração.
-//         Resumindo
-// As arrow functions são uma adição poderosa ao JavaScript, oferecendo uma sintaxe mais limpa e um comportamento de this mais previsível.Elas são especialmente úteis em contextos onde o this precisa ser preservado, como em callbacks e funções passadas como argumentos.No entanto, é importante entender suas limitações e saber quando é mais apropriado usar funções tradicionais.Com a prática, você se tornará confortável em decidir qual tipo de função usar em diferentes situações.
+// ARROWS FUNCTIONS
+// Deixam mais curta as function. introduzidas no ES6(ECMAScript 2015)
+function arcos() {
+    // Sintaxe Básica:
+    const nomeDaFuncao = (parametros) => {
+        // corpo da função 
+    };
 
+    // Sintaxe Concisa:
+    // if(only line code and return one value) you can hide a keys and word "return":
+    const soma = (a, b) => a + b;
 
+    // if(AND only param) you can hide ()
+    const quadrado = x => x * x;
 
+    // if(!param) param is empty
+    const logMensagem = () => console.log('Olá, mundo!');
+
+    // THIS 
+    //  na arrow são herdados do cntxt inserido, pode causar problemas em métodos de objetos, 
+    //  pois this pode não se referir ao objeto esperado. útil em callbacks e funções que são
+    //  passadas como argumentos.
+    // Considere o seguinte código que usa uma função tradicional:
+    function Pessoa() {
+        this.idade = 0;
+        setInterval(
+            function crescer() {
+                this.idade++;
+                // Aqui, `this` não se refere ao objeto Pessoa   
+            }, 1000);
+    }
+    // this dentro de crescer não se refere ao objeto Pessoa, mas isso pode ser corrigido usando uma arrow function:
+    function Pessoa() {
+        this.idade = 0; setInterval(() => {
+            this.idade++; // Aqui, `this` se refere ao objeto Pessoa  
+        }, 1000);
+    }
+    // Arrows & Funções Tradicionais:
+    //      Alguns casos não podem substituir functions tradiconais pois não têm seu próprio this,
+    //      arguments, super ou new.target e não podem ser usadas como construtores.
+    // Quando Usar Arrow Functions:
+    //  	callbacks, anônimas, em métodos de array como map, filter, funções que passam funções,
+    //  	Quando o comportamento léxico do this é desejado.
+    // Quando Evitar Arrow Functions
+    //  	Métodos de objeto que você espera usar this para acessar o próprio objeto.
+    //  	Funções que você planeja usar como construtores(com a palavra - chave new).
+    //  	função com nome para melhorar a legibilidade ou para fins de depuração.
+}
+
+// cmd = command prompt
+// pwd = print working directory
+
+// Path Absloute e Relative
+// absolute path: caminho completo do arquivo, começa com a raiz do sistema de arquivos.
+// relative path: caminho relativo ao arquivo atual, começa com o diretório atual.
 
 // xplicar a função seu input e output
 
@@ -455,13 +545,13 @@ function funcoesDOM() {
 
 // Para desenvolver essa funcionalidade, vamos iniciar com a função lerConteudoDoArquivo, que será responsável por ler o conteúdo de um arquivo selecionado pelo usuário e retornar uma Promise que será resolvida com os dados da leitura ou rejeitada em caso de erro.
 //     function lerConteudoDoArquivo(arquivo) {
-//         return new Promise((resolve, reject) => {         // Cria um novo leitor de arquivo         const leitor = new FileReader();          // Define o que acontece quando a leitura é completada com sucesso         leitor.onload = () => {             // Resolve a Promise com um objeto contendo a URL e o nome do arquivo             resolve({ url: leitor.result, nome: arquivo.name });         };          // Define o que acontece em caso de erro na leitura do arquivo         leitor.onerror = () => {             // Rejeita a Promise com uma mensagem de erro personalizada             reject(`Erro na leitura do arquivo ${arquivo.name}`);         };          // Inicia a leitura do arquivo como uma URL data (base64)         leitor.readAsDataURL(arquivo);     }); } Copiar código
+//         return new Promise((resolve, reject) => {         // Cria um novo leitor de arquivo         const leitor = new FileReader();          // Define o que acontece quando a leitura é completada com sucesso         leitor.onload = () => {             // Resolve a Promise com um objeto contendo a URL e o nome do arquivo             resolve({ url: leitor.result, nome: arquivo.name });         };          // Define o que acontece em caso de erro na leitura do arquivo         leitor.onerror = () => {             // Rejeita a Promise com uma mensagem de erro personalizada             reject(`Erro na leitura do arquivo ${arquivo.name}`);         };          // Inicia a leitura do arquivo como uma URL data (base64)         leitor.readAsDataURL(arquivo);     }); } 
 //             Promise: A função retorna uma Promise que pode ser resolvida(resolve) quando a leitura do arquivo é concluída com sucesso ou rejeitada(reject) se ocorrer algum erro durante a leitura.
 //                 FileReader: É utilizado para ler o conteúdo de arquivos selecionados pelo usuário.
 // Event Handlers: onload é acionado quando a leitura é bem - sucedida, enquanto onerror é acionado se ocorrer algum erro durante a leitura.
 //                 readAsDataURL: Inicia a leitura do arquivo como uma URL de dados(data URL), que é uma representação base64 do conteúdo do arquivo.
 // Em seguida, vamos construir um ouvinte para quando acontecer alguma mudança no input de upload.Esse ouvinte que chamará a funcionalidade de leitura do arquivo.
-//                 // Seleciona elementos HTML da páginaconst imagemPrincipal = document.querySelector(".main-imagem"); const nomeDaImagem = document.querySelector(".container-imagem-nome p"); const inputUpload = document.getElementById("input-upload");  // Adiciona um ouvinte de evento para o input de upload de arquivo inputUpload.addEventListener("change", async (evento) => {     // Obtém o arquivo selecionado pelo usuário     const arquivo = evento.target.files[0];      // Verifica se um arquivo foi selecionado     if (arquivo) {         try {             // Aguarda a leitura do conteúdo do arquivo             const conteudoDoArquivo = await lerConteudoDoArquivo(arquivo);              // Atualiza a imagem principal com a URL do arquivo             imagemPrincipal.src = conteudoDoArquivo.url;              // Atualiza o nome da imagem na página             nomeDaImagem.textContent = conteudoDoArquivo.nome;         } catch (erro) {             // Em caso de erro na leitura do arquivo, exibe uma mensagem de erro no console             console.error("Erro na leitura do arquivo:", erro);         }     } }); Copiar código
+//                 Seleciona elementos HTML da páginaconst imagemPrincipal = document.querySelector(".main-imagem"); const nomeDaImagem = document.querySelector(".container-imagem-nome p"); const inputUpload = document.getElementById("input-upload");  // Adiciona um ouvinte de evento para o input de upload de arquivo inputUpload.addEventListener("change", async (evento) => {     // Obtém o arquivo selecionado pelo usuário     const arquivo = evento.target.files[0];      // Verifica se um arquivo foi selecionado     if (arquivo) {         try {             // Aguarda a leitura do conteúdo do arquivo             const conteudoDoArquivo = await lerConteudoDoArquivo(arquivo);              // Atualiza a imagem principal com a URL do arquivo             imagemPrincipal.src = conteudoDoArquivo.url;              // Atualiza o nome da imagem na página             nomeDaImagem.textContent = conteudoDoArquivo.nome;         } catch (erro) {             // Em caso de erro na leitura do arquivo, exibe uma mensagem de erro no console             console.error("Erro na leitura do arquivo:", erro);         }     } }); 
 //                 querySelector: Seleciona elementos HTML na página usando seletores de classe(".main-imagem" e ".container-imagem-nome p").
 //                     inputUpload.addEventListener: Adiciona um ouvinte de evento para o input de upload de arquivo(inputUpload).O evento change é acionado quando o usuário seleciona um arquivo.
 // Evento change: Quando o evento é acionado, o código dentro da função assíncrona(async (evento) => { ... }) é executado.
@@ -469,3 +559,196 @@ function funcoesDOM() {
 // Await e try...catch: await lerConteudoDoArquivo(arquivo) espera pela conclusão da função lerConteudoDoArquivo e captura qualquer erro usando try...catch.
 // Atualização da Página: Se a leitura for bem - sucedida, imagemPrincipal.src é atualizado com a URL do arquivo e nomeDaImagem.textContent é atualizado com o nome do arquivo.
 // Este fluxo permite que o usuário selecione um arquivo, veja uma pré - visualização da imagem e saiba o nome do arquivo carregado, usando assincronicidade e promessas para gerenciar operações de leitura de arquivo de forma eficiente e responsiva na página web.
+// variavel.replace() usada para fazer substituições de string da mais complexas a mais simples podendo ser útil para criar mascara.Primeiro recebe como parâmetro o que deseja ser retirado e depois o que irá substituir.É possível criar uma lista de palavras com palavrão e depois substituir por * ou outra coisa.O problema é que ele substitui apenas a primeira palavra para resolver esse problema temos que usar regex semelhante a seguinte forma “/palavra/g” o ‘g’ serve para indica que a variavel é global
+
+
+
+
+
+// Async Await
+// na tag input é possivel validar o tipo de arquivo usando atributo accept
+// promise (Promesa)
+
+
+// JSON
+// Não é js por mais que se assemelhei ao um object js
+// Tds keys são as duplas only ("") e não pode haver virgula no final
+// lida apenas com dados sem comentarios e funções, ele só aceita dados primitivos
+// substitui o xml
+// Necessario tratar os valores quando exportados
+function jsonEjs() {
+    const objetoOriginal = { chave: 'valor' };
+    const copiaProfunda = JSON.parse(JSON.stringify(objetoOriginal));// clonagem profunda
+    // json.parse converte de string para objeto
+    // json.stringify converte de objeto para string
+    copiaProfunda.chave = 'novoValor';
+    console.log(objetoOriginal.chave); // Saída: valor
+
+}
+
+// IMPORT E EXPORT
+function ImpExp() {
+    // Há dois jeito CJS(Commom javascript) ou ESM(EcmaScript Modules)
+    // Modulos serve para esconder detalhes da implementação tornando
+    // mais organizado (Fragmentar o problema)
+
+    // CJS(Commom javascript)
+    //   baseado na require cria alterações do objeto padrão global exports ao inves de usar metodos para isso
+    //   objeto global exports é sempre definido internamente pelo Node.js. Assim, quando queremos exportar
+    //   vários módulos, atribuímos estes módulos como propriedades do objeto exports:
+    //      exports.soma = function(num1, num2) { return num1 + num2;}
+    //        Or:
+    //      module.exports = soma;
+    //   Agora para import:
+    //   const soma = require('./operacoes.js');
+    // arquivo 'operacoes.js'
+    // Usando desestruturação de OBJs
+    module.exports = {
+        soma(num1, num2) { return num1 + num2; },
+        multiplica(num1, num2) { return num1 * num2; },
+        subtrai(num1, num2) { return num1 - num2; }
+    };
+    // arquivo 'index.js'
+    const { soma, multiplica } = require('./operacoes.js');
+    //obj completo e usa tds metodos
+    const operacoes = require('./operacoes.js');
+    const numerosSomados = operacoes.soma(4, 2) //6
+
+    //import no inicio e export antes da declaração de funções or etc
+
+    // ESM(EcmaScript Modules)
+    // usa import e export como navegadores utilizam empacotadores para otimizar
+    // o serviço no node é necessario a fragmentação do code acessados apenas
+    // pelo proprio arquivo sendo privados a não ser que sejam explicitamente
+    // exportados e importados em outro arquivo/módulo. Para export (export default validaCartao;) 
+    // para usa-la import validaCartao from 'validacoes/validacaoCartao.js';
+    // Exportar only necessario (import { body } from 'express-validator';)
+    // Pode se dizer que é um sistema de segurança pois limita o acesso de arquivos, fun, class e etc
+    // deve conter a extensao no caminho != de cjs
+
+    //     Importante: Para utilizar o ESM em aplicações 
+    //     Node.js, é necessário adicionar a propriedade 
+    //     type: module no arquivo package.json, conforme
+
+    // exportação: arquivo 'operacoes.js'
+    // export function soma(num1, num2) {return num1 + num2;}
+    // export function multiplica(num1, num2) {return num1 * num2;}
+    // importação: arquivo 'index.js'
+    // import { soma, multiplica } from './operacoes.js';
+
+    // USE desestruturação
+    // export { soma, multiplica, subtrai };
+    // import { soma, multiplica, subtrai } from './operacoes.js';
+
+    // DEFAULT para especificar
+    // export default validaCartao;
+
+    // Enquanto a exportação com export só pode ser usada em funções
+    // nomeadas, a exportação padrão com export default pode ser feita
+    // em funções anônimas e também em objetos literais
+
+    // forma abreviada de importar varios modulos (desde que não sejam default)
+    // import * as operacoes from './operacoes.js';
+
+    // Extensão .mjs (módulo javascript) não a efeito pratico
+    // Extensão .cjs (commonjs) não a efeito pratico
+    // não misturar as duas juntas
+
+}
+
+function exportarMaisTarde() {
+    // API (Application Programming Interface)
+    // LIda com dado fazendo solicitação de informações. http é um exemplo.
+
+    // API SOAP (Simple Object Access Protocol)
+    // protocolo de comunicação entre sistemas que utiliza XML para troca de mensagens.
+    // definada em Envelope com elementos raiz header(opcional) e body, cabeçalho transmiti
+    // informações relaconadas a autenticacao e segurança, id de transações e outros detalhes.
+    // normalmente possuem sistemas dde segurança rigidos oferece suporte a ws-security. 
+    // Exemplo: SOAP transações financeiras, reserva de viagens, serviços de saúde, integração
+    // de sistemas empresariais e etc.
+
+    // API REST (Representational State Transfer)
+    // é um estilo de arquitetura para desenvolvimento de aplicações web. normalmente usa
+    // json e seus protocolos padrão, deve estar alinhado com 
+    // 1.interface uniforme http com uris e crud
+    // 2.separação cliente server um independente do outro
+    // 3.sem estado definido cada solicitação precisa ter as informações necessárias para
+    // o processamento. 
+    // 4.capacidade de cache tanto server como client
+    // 5.arquitetura de sistema em camadas cada camada com funções especificas
+    // 6.codigo sob demanda(opcional)permite ao servidor enviar código executável (como
+    // applets Java ou scripts JavaScript) para ser executado pelo cliente, estendendo
+    // as capacidades do cliente de forma dinâmica
+
+    // REST x SOAP
+    // - SOAP é um protocolo, enquanto o REST é um padrão de arquitetura;
+    // - SOAP é independente de linguagem, transporte e até plataforma, 
+    // enquanto o REST requer o uso do protocolo HTTP;
+    // - SOAP é uma abordagem muito presente ainda em sistemas legados, enquanto
+    // REST surgiu posteriormente e costuma ser vista como uma solução mais
+    // eficiente em questão de performance nos casos bases em web;
+    // - Para contextos mais leves como IoT (Internet das coisas), desenvolvimento
+    // de aplicações serverless e mobile é recomendado o REST, para sistemas que
+    // requerem mais segurança e muitas necessidades empresariais é recomendado o SOAP;
+    // - O formato dos dados do SOAP é somente por meio de XML, enquanto o REST oferece
+    // suporte a XML, JSON, HTML e texto simples.
+
+    // GraphQL
+    // lp de consulta para APIs otimizado para comunicação de requisição e resposta. Funciona numa
+    // camada intermediária entre o cliente e o servidor, onde entrega e solicita apenas o necessario.
+    // compátivel com todas lp usadas no mercado.
+
+    // Webhooks
+    // são notificações enviadas por um servidor para um cliente quando ocorre um evento.
+    // normalmente são usados para atualizar ou notificar aplicações em tempo real(usa http).
+    //  O processo de webhook envolve 3 partes principais:
+    //      provedor: a aplicação que enviará as notificações
+    //      consumidor: a aplicação que receberá as notificações
+    //      próprio webhook: ponto de integração entre os dois sistemas
+    // webhooks são definidos como APIs reversas, pois permitem que um servidor envie dados quando
+    // necessário, em vez de o cliente enviar uma solicitação e aguardar ou verificar periodicamente.
+
+    // Políticas de APIs
+    //      Privada, Parceiro(uber) somente com permissão para uso & pública.
+
+
+
+    // HTTP:
+    // protocolo de rede que faz solicitações de arquivos. estabelece contato com sevrer e recaminha uma requissição onde pode vriar conforme o metodo
+    // essa interação ocorre por meio do TCP (Transmission Control Protocol), que garante uma comunicação confiável e orientada à conexão.
+    // cada requissição é de forma independente sem informações das anteriores. Para agilizar os mecanismos tem os cookies e ssesssões. Protocolo
+    // famoso API. 
+    //      Proxies
+    //          Representantes atuam como intermediarios entre cliente e server lidando com tráfego de dados entre eles, exemplo forward proxy
+    //          cliente e o servidor, agindo em nome dos clientes para buscar recursos dos servidores; e o reverse proxy, posicionado entre 
+    //          clientes e servidores, mas operando em nome dos servidores para receber solicitações dos clientes. Alem de otimizar e melhorar 
+    //          a eficiencia utilizam mecanismo de cache local. Tem beneficios de segurança permitindo filtragem, controle e anonimato web. 
+    //          Adicionalmente, proxies podem realizar balanceamento de carga entre servidores, acelerar o carregamento de páginas por meio 
+    //          da compressão de dados, e fornecer logging e monitoramento para análise de padrões de uso e garantia de conformidade 
+    //          com políticas de segurança.
+    // 
+    //      Métods http get, post, put e delete cada um com suas funções.
+    //      URI (Uniform Resource Identifier) Os recursos na web são identificados por URLs (Uniform Resource Locators) ou URIs. 
+    //          Uma URI é uma sequência de caracteres que identifica um nome ou um recurso na web.
+    //      headers contem informações add sobre as requisições ou resposta.
+    //      hipermídia arquivos que o http suporta permitindo a transmissão de diversos dados online
+    //      
+    //      Request-Response requisição feita do clint para server para recurso ou ação.
+    //      request line, status line etc.
+    //      
+    //      get solicitações especificas mais comum controle de cache e autenticação
+    //      head semelhante ao get mas usado para informações sobre recurso do cabeçalho da resposta sem o corpo util para metadados
+    //          sem carregar o recurso completo.
+    //      post usado em form e recurso no server
+    //      put para enviar dados, criar, atualizar um recurso especifico na URI, substituindo completamente o recurso
+    //      delete remoção de recurso se tornando inacessivel
+    //      trace diagnóstico semelhante ao debug, permite que o cliente veja as alterações que foram feita no caminho até o server
+    //      options para obter as opções de comunicação permitidas para um recurso ou servidor. Isso pode incluir métodos permitidos
+    //          cabeçalhos aceitáveis, entre outras informações relevantes.
+    //      connect para estabelecer conexão de tunel com sever seguras atraves do proxy http com ssl/tls normalmente
+    //
+    //      http x https
+    //      htpp não usa criptocrafia diferente do outro que usa o ssl/tls
+
+}
